@@ -9,12 +9,17 @@ describe "Static pages" do
       page.should have_selector('h1', :text => 'Sample App')
     end 
 
-    it "should have the right title" do
+    it "should have the base title" do
       visit '/static_pages/home'
       page.should have_selector('title', 
-                        :text => 'RoR Tutorial Sample App | Home')
+                        :text => "RoR Tutorial Sample App")
     end
 
+    it "should not have a custom page title" do
+      visit '/static_pages/home'
+      page.should_not have_selector('title', 
+                        :text => "| Home")
+    end
   end
 
   describe "Help page" do
@@ -22,12 +27,6 @@ describe "Static pages" do
     it "should have the content 'Help'" do
       visit '/static_pages/help'
       page.should have_selector('h1', :text => 'Help')
-    end
-
-    it "should have the right title" do
-      visit '/static_pages/help'
-      page.should have_selector('title', 
-                        :text => 'RoR Tutorial Sample App | Help')
     end
 
   end
